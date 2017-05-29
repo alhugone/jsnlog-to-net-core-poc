@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<script src='jsnlog.min.js'></script>
+	<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.23.0/jsnlog.min.js'></script>-->
+
+</head>
+
+<body>
+	<input type="text" id='logging-url-input' />
+	<button onClick='changeLoggingUrl()'>Change Url</button>
+	<button onClick='sendLogsToServer()'>Send logs to server</button>
+	<button onClick='generateError()'>Generate error</button>
+
+	<script>
+		const defaultLoggingUrl = 'http://localhost:5000/logging';
+
+		JL.setOptions({
+			"defaultAjaxUrl": defaultLoggingUrl,
+		});
+
+		document.getElementById('logging-url-input').value = defaultLoggingUrl;
+
+		function sendLogsToServer() {
+			JL('WebApp').info('This is info message');
+			JL('WebApp').error('This is info error');
+		}
+
+		function generateError() {
+			throw 'Error generated';
+		}
+
+		function changeLoggingUrl() {
+			const newloggingUrl = document.getElementById('logging-url-input').value;
+			JL.setOptions({
+				"defaultAjaxUrl": newloggingUrl,
+			});
+		}
+	</script>
+
+</body>
+
+</html>
