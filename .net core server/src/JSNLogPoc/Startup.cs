@@ -1,6 +1,7 @@
 ﻿using JSNLog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,9 +32,12 @@ namespace JSNLogPoc
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            var jsnlogConfiguration = new JsnlogConfiguration {corsAllowedOriginsRegex = ".*", defaultAjaxUrl="logging"};
+            var jsnlogConfiguration = new JsnlogConfiguration {
+                corsAllowedOriginsRegex = ".*",
+                defaultAjaxUrl ="logging",
+                serverSideMessageFormat = "%date | %requestId | %userAgent| %logger | %url | %userHostAddress | %level | %message | "
+            };
             app.UseJSNLog(new LoggingAdapter(loggerFactory), jsnlogConfiguration);
-
             app.UseMvc();
         }
     }

@@ -4,23 +4,25 @@
 <head>
 	<meta charset="utf-8">
 	<script src='jsnlog.min.js'></script>
-	<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.23.0/jsnlog.min.js'></script>-->
-
 </head>
 
 <body>
+	<input type="text" id='requestId' />
 	<input type="text" id='logging-url-input' />
-	<button onClick='changeLoggingUrl()'>Change Url</button>
+	<button onClick='updateConfig()'>Update config</button>
 	<button onClick='sendLogsToServer()'>Send logs to server</button>
 	<button onClick='generateError()'>Generate error</button>
 
 	<script>
 		const defaultLoggingUrl = 'http://localhost:5000/logging';
+		const defaultRequestId = 'request-XXX';
 
 		JL.setOptions({
 			"defaultAjaxUrl": defaultLoggingUrl,
+			"requestId": defaultRequestId
 		});
 
+		document.getElementById('requestId').value = defaultRequestId;
 		document.getElementById('logging-url-input').value = defaultLoggingUrl;
 
 		function sendLogsToServer() {
@@ -32,10 +34,12 @@
 			throw 'Error generated';
 		}
 
-		function changeLoggingUrl() {
+		function updateConfig() {
 			const newloggingUrl = document.getElementById('logging-url-input').value;
+			const newRequestId = document.getElementById('requestId').value;
 			JL.setOptions({
 				"defaultAjaxUrl": newloggingUrl,
+				"requestId": newRequestId
 			});
 		}
 	</script>

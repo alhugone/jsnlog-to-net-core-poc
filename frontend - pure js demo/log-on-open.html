@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jsnlog/2.24.0/jsnlog.min.js'></script>
+</head>
+
+<body>
+	<script>
+		const defaultLoggingUrl = 'http://localhost:5000/logging';
+		JL.setOptions({
+			"defaultAjaxUrl": defaultLoggingUrl,
+		});
+		JL('WebApp').info('This is info message');
+		JL('WebApp.Namespace1').warn('This is warn message');
+		JL('WebApp.Namespace2').error('This is error message');
+	</script>
+</body>
+
+</html>
