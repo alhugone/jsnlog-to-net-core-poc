@@ -11,17 +11,9 @@
 		const defaultLoggingUrl = 'http://localhost:5000/logging';
 		JL.setOptions({
 			"defaultAjaxUrl": defaultLoggingUrl,
-			"requestId": generateRequestId()
 		});
-		JL('WebApp').debug('This is debug message');
-
-		function generateRequestId() {
-			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-				var r = Math.random() * 16 | 0,
-					v = c == 'x' ? r : (r & 0x3 | 0x8);
-				return v.toString(16);
-			});
-		}
+		JL('WebApp.Namespace1').warn('This is warn message');
+		JL('WebApp.Namespace2').error('This is error message');
 	</script>
 </body>
 
